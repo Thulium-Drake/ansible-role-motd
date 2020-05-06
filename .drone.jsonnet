@@ -4,6 +4,8 @@ local Converge(distro) = {
   commands: [
     "molecule destroy",
     "molecule converge",
+    "molecule idempotence",
+    "molecule verify",
     "molecule destroy",
   ],
   environment:
@@ -25,23 +27,33 @@ local Converge(distro) = {
         commands: [
           "molecule lint",
           "molecule syntax"
-        ]
+        ],
+        privileged: true,
+        volumes: [
+          { name: "docker", path: "/var/run/docker.sock" },
+        ],
       }
-    ]
+    ],
+    volumes: [
+      { name: "docker",
+        host: { path: "/var/run/docker.sock" }
+      },
+    ],
   },
 #  {
 #    kind: "pipeline",
 #    name: "Test",
 #    steps: [
+#      Converge("debian9"),
 #      Converge("debian10"),
-#      Converge("ubuntu2004"),
-#      Converge("centos7"),
+#      Converge("ubuntu1804"),
 #    ],
 #    volumes: [
 #      { name: "docker",
 #        host: { path: "/var/run/docker.sock" }
 #      },
 #    ],
+#
 #    depends_on: [
 #      "Lint",
 #    ],
@@ -57,7 +69,7 @@ local Converge(distro) = {
         image: "registry.element-networks.nl/tools/molecule",
         commands: [
           "ansible-galaxy login --github-token $$GITHUB_TOKEN",
-          "ansible-galaxy import Thulium-Drake ansible-role-motd --role-name=motd",
+          "ansible-galaxy import Thulium-Drake ansible-role-apt --role-name=apt",
         ],
         environment:
           { GITHUB_TOKEN: { from_secret: "github_token" } },
