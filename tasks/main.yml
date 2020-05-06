@@ -1,0 +1,15 @@
+---
+- name: 'Install MOTD script'
+  copy:
+    src: "{{ motd_script }}"
+    dest: '/usr/local/sbin/update_motd.sh'
+    owner: 'root'
+    group: 'root'
+    mode: 0755
+
+- name: 'Schedule MOTD in cron'
+  cron:
+    state: 'present'
+    name: 'Update MOTD'
+    job: '/usr/local/sbin/update_motd.sh'
+
