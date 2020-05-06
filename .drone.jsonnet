@@ -69,7 +69,7 @@ local Converge(distro) = {
         image: "registry.element-networks.nl/tools/molecule",
         commands: [
           "ansible-galaxy login --github-token $$GITHUB_TOKEN",
-          "ansible-galaxy import Thulium-Drake ansible-role-apt --role-name=apt",
+          "ansible-galaxy import Thulium-Drake ansible-role-motd --role-name=motd",
         ],
         environment:
           { GITHUB_TOKEN: { from_secret: "github_token" } },
