@@ -45,5 +45,7 @@ echo "" >> ${TMPFILE}
 echo "This system is managed by Ansible" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Uptime   : ${UPTIME_DAYS} days ${UPTIME_HOURS}h${UPTIME_MINS}m" >> ${TMPFILE}
+echo "" >> ${TMPFILE}
+echo "Authorized uses only. All activity may be monitored and reported." >> ${TMPFILE}
 mv ${TMPFILE} /etc/motd
-
+chmod 0644 /etc/motd
