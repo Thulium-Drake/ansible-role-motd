@@ -7,8 +7,27 @@
     group: 'root'
     mode: 0755
 
+- name: 'Ensure cron is installed'
+  package:
+    name: 'cron'
+    state: 'present'
+
 - name: 'Schedule MOTD in cron'
   cron:
     state: 'present'
     name: 'Update MOTD'
     job: '/usr/local/sbin/update_motd.sh'
+
+- name: 'Set up issue.net and issue'
+  copy:
+    dest: "/etc/{{ issue }}"
+    content: "{{ issue_banner }}"
+    force: true
+    owner: 'root'
+    group: 'root'
+    mode: 0644
+  loop:
+    - 'issue'
+    - 'issue.net'
+  loop_control:
+    loop_var: 'issue'

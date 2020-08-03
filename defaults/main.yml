@@ -3,3 +3,6 @@
 #
 # You can set this to any script file that can be resolved by Ansible
 motd_script: 'update_motd.sh'
+
+# The banner set for issue and issue.net, default is empty
+issue_banner: ''
