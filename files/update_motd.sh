@@ -12,6 +12,7 @@ UPTIME=$(expr $UPTIME - $(expr $UPTIME_HOURS \* 3600))
 UPTIME_MINS=$(expr $(echo $UPTIME) / 60)
 RAM_SIZE=$(free -h | grep ^Mem: | awk '{print $2}')
 RAM_FREE=$(free -h | grep ^Mem: | awk '{print $4}')
+HOSTNAME=$(hostname -f)
 
 FILESYSTEMS="ext|xfs|jfs|jffs|simfs|reiserfs|fat|ffs|ufs|vxfs|zfs"
 # Exclude filesystems with the following text in their path/type
@@ -34,6 +35,8 @@ esac
 
 TMPFILE=$(mktemp)
 echo "" > ${TMPFILE}
+echo "Hostname: $HOSTNAME"
+echo ""
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Disk status:" >> ${TMPFILE}
@@ -47,5 +50,7 @@ echo "" >> ${TMPFILE}
 echo "Uptime   : ${UPTIME_DAYS} days ${UPTIME_HOURS}h${UPTIME_MINS}m" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Authorized uses only. All activity may be monitored and reported." >> ${TMPFILE}
+echo ""
+cat /etc/motd_ansible_timestamp
 mv ${TMPFILE} /etc/motd
 chmod 0644 /etc/motd

@@ -34,3 +34,10 @@
     - 'issue.net'
   loop_control:
     loop_var: 'issue'
+
+- name: 'Place current time in marker file'
+  copy:
+    content: |
+      Last Ansible run: {{ ansible_facts['date_time']['date'] }} {{ ansible_facts['date_time']['time'] }}
+  dest: '/etc/motd_ansible_timestamp'
+  changed_when: false
