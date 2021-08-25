@@ -28,7 +28,7 @@
     force: true
     owner: 'root'
     group: 'root'
-    mode: 0644
+    mode: 0444
   loop:
     - 'issue'
     - 'issue.net'
@@ -39,5 +39,8 @@
   copy:
     content: |
       Last Ansible run: {{ ansible_facts['date_time']['date'] }} {{ ansible_facts['date_time']['time'] }}
-  dest: '/etc/motd_ansible_timestamp'
+    dest: '/etc/motd_ansible_timestamp'
+    owner: 'root'
+    group: 'root'
+    mode: 0444
   changed_when: false
