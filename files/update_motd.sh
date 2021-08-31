@@ -35,7 +35,7 @@ esac
 
 TMPFILE=$(mktemp)
 echo "" > ${TMPFILE}
-echo "Hostname: $HOSTNAME"
+echo "Hostname: $HOSTNAME" >> ${TMPFILE}
 echo ""
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
