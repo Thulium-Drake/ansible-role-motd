@@ -51,6 +51,6 @@ echo "Uptime   : ${UPTIME_DAYS} days ${UPTIME_HOURS}h${UPTIME_MINS}m" >> ${TMPFI
 echo "" >> ${TMPFILE}
 echo "Authorized uses only. All activity may be monitored and reported." >> ${TMPFILE}
 echo ""
-cat /etc/motd_ansible_timestamp
+cat /etc/motd_ansible_timestamp >> ${TMPFILE}
 mv ${TMPFILE} /etc/motd
 chmod 0644 /etc/motd
