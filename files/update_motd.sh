@@ -36,7 +36,7 @@ esac
 TMPFILE=$(mktemp)
 echo "" > ${TMPFILE}
 echo "Hostname: $HOSTNAME" >> ${TMPFILE}
-echo ""
+echo "" >> ${TMPFILE}
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Disk status:" >> ${TMPFILE}
@@ -50,7 +50,7 @@ echo "" >> ${TMPFILE}
 echo "Uptime   : ${UPTIME_DAYS} days ${UPTIME_HOURS}h${UPTIME_MINS}m" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Authorized uses only. All activity may be monitored and reported." >> ${TMPFILE}
-echo ""
+echo "" >> ${TMPFILE}
 cat /etc/motd_ansible_timestamp >> ${TMPFILE}
 mv ${TMPFILE} /etc/motd
 chmod 0644 /etc/motd
