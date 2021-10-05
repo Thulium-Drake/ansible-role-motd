@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  author: Jeffrey van Pelt
+  author: thulium_drake
   description: Installs a message of the day on systems
   company:
   role_name: motd
@@ -13,6 +13,7 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+        - bullseye
     - name: Ubuntu
       versions:
         - bionic
