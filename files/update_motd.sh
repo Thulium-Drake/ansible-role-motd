@@ -4,6 +4,13 @@
 #      R3boot  (r3boot@r3blog.nl)
 # This file is Ansible managed, your changes will be lost!
 
+if [ -f /etc/os-release ];
+then
+  source /etc/os-release
+  OS_NAME=$PRETTY_NAME
+else
+  OS_NAME='OS type not detected'
+fi
 UPTIME=$(cat /proc/uptime | awk '{print $1}' | cut -d. -f1)
 UPTIME_DAYS=$(expr $(echo $UPTIME) / 86400)
 UPTIME=$(expr $UPTIME - $(expr $UPTIME_DAYS \* 86400))
@@ -36,6 +43,7 @@ esac
 TMPFILE=$(mktemp)
 echo "" > ${TMPFILE}
 echo "Hostname: $HOSTNAME" >> ${TMPFILE}
+echo "OS: $OS_NAME" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
