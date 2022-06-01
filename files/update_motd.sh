@@ -21,7 +21,7 @@ RAM_SIZE=$(free -h | grep ^Mem: | awk '{print $2}')
 RAM_FREE=$(free -h | grep ^Mem: | awk '{print $4}')
 HOSTNAME=$(hostname -f)
 
-FILESYSTEMS="ext|xfs|jfs|jffs|simfs|reiserfs|fat|ffs|ufs|vxfs|zfs"
+FILESYSTEMS="ext.?|xfs|jfs|jffs|simfs|reiserfs|fat|ffs|ufs|vxfs|zfs"
 # Exclude filesystems with the following text in their path/type
 EXLC_FILESYSTEMS="autofs"
 
@@ -48,7 +48,7 @@ echo "" >> ${TMPFILE}
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Disk status:" >> ${TMPFILE}
-cat /proc/mounts | egrep ${FILESYSTEMS} | egrep -v ${EXLC_FILESYSTEMS} | awk '{print $2}' | while read FS; do
+cat /proc/mounts | egrep -w ${FILESYSTEMS} | egrep -v ${EXLC_FILESYSTEMS} | awk '{print $2}' | while read FS; do
   FREE=$(${DF} -h ${FS} | egrep -v '^File' |awk '{print $4}')
   echo "${FS} has ${FREE} free" >> ${TMPFILE}
 done
