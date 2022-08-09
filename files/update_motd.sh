@@ -57,7 +57,7 @@ echo "This system is managed by Ansible" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Uptime   : ${UPTIME_DAYS} days ${UPTIME_HOURS}h${UPTIME_MINS}m" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
-echo "Authorized uses only. All activity may be monitored and reported." >> ${TMPFILE}
+cat /etc/issue >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 cat /etc/motd_ansible_timestamp >> ${TMPFILE}
 mv ${TMPFILE} /etc/motd
