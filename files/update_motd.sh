@@ -19,7 +19,6 @@ UPTIME=$(expr $UPTIME - $(expr $UPTIME_HOURS \* 3600))
 UPTIME_MINS=$(expr $(echo $UPTIME) / 60)
 RAM_SIZE=$(free -h | grep ^Mem: | awk '{print $2}')
 RAM_FREE=$(free -h | grep ^Mem: | awk '{print $4}')
-HOSTNAME=$(hostname -f)
 
 FILESYSTEMS="ext.?|xfs|jfs|jffs|simfs|reiserfs|fat|ffs|ufs|vxfs|zfs"
 # Exclude filesystems with the following text in their path/type
