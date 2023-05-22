@@ -1,34 +1,34 @@
 ---
 - name: 'Install MOTD script'
-  copy:
+  ansible.builtin.copy:
     src: "{{ motd_script }}"
     dest: '/usr/local/sbin/update_motd.sh'
     owner: 'root'
     group: 'root'
-    mode: 0755
+    mode: '0755'
 
 - name: 'Load OS-family varables'
-  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+  ansible.builtin.include_vars: "{{ ansible_facts['os_family'] }}.yml"
 
 - name: 'Ensure cron is installed'
-  package:
+  ansible.builtin.package:
     name: "{{ cron_package }}"
     state: 'present'
 
 - name: 'Schedule MOTD in cron'
-  cron:
+  ansible.builtin.cron:
     state: 'present'
     name: 'Update MOTD'
     job: '/usr/local/sbin/update_motd.sh'
 
 - name: 'Set up issue.net and issue'
-  copy:
+  ansible.builtin.copy:
     dest: "/etc/{{ issue }}"
     content: "{{ issue_banner }}"
     force: true
     owner: 'root'
     group: 'root'
-    mode: 0444
+    mode: '0444'
   loop:
     - 'issue'
     - 'issue.net'
@@ -36,11 +36,11 @@
     loop_var: 'issue'
 
 - name: 'Place current time in marker file'
-  copy:
+  ansible.builtin.copy:
     content: |
       Last Ansible run: {{ ansible_facts['date_time']['date'] }} {{ ansible_facts['date_time']['time'] }}
     dest: '/etc/motd_ansible_timestamp'
     owner: 'root'
     group: 'root'
-    mode: 0444
+    mode: '0444'
   changed_when: false
