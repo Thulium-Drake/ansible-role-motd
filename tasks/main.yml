@@ -1,6 +1,6 @@
 ---
 - name: 'Install MOTD script'
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: "{{ motd_script }}"
     dest: '/usr/local/sbin/update_motd.sh'
     owner: 'root'
