@@ -42,6 +42,7 @@ esac
 TMPFILE=$(mktemp)
 echo "" > ${TMPFILE}
 echo "Hostname: $HOSTNAME" >> ${TMPFILE}
+echo "Function: {{ motd_host_function | default('Not defined', true) }}" >> ${TMPFILE}
 echo "OS: $OS_NAME" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}

@@ -9,3 +9,6 @@ motd_authorization_warning: false
 
 # The banner set for issue and issue.net, default is empty
 issue_banner: ''
+
+# What does the host do?
+motd_host_function: ''
