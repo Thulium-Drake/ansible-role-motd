@@ -48,8 +48,8 @@ echo "" >> ${TMPFILE}
 echo "RAM: $RAM_FREE free of $RAM_SIZE" >> ${TMPFILE}
 echo "" >> ${TMPFILE}
 echo "Disk status:" >> ${TMPFILE}
-cat /proc/mounts | egrep -w ${FILESYSTEMS} | egrep -v ${EXLC_FILESYSTEMS} | awk '{print $2}' | while read FS; do
-  FREE=$(${DF} -h ${FS} | egrep -v '^File' |awk '{print $4}')
+cat /proc/mounts | grep -Ew ${FILESYSTEMS} | grep -Ev ${EXLC_FILESYSTEMS} | awk '{print $2}' | while read FS; do
+  FREE=$(${DF} -h ${FS} | grep -Ev '^File' |awk '{print $4}')
   echo "${FS} has ${FREE} free" >> ${TMPFILE}
 done
 echo "" >> ${TMPFILE}
