@@ -34,14 +34,14 @@ jobs:
             do
               echo "Testing Distro $i"
               MOLECULE_DISTRO=$i molecule converge
-              molecule idempotence
+              MOLECULE_DISTRO=$i molecule idempotence
 
               if test -e molecule/default/verify.yml
               then
-                molecule verify
+                MOLECULE_DISTRO=$i molecule verify
               fi
 
-              molecule destroy
+              MOLECULE_DISTRO=$i molecule destroy
               echo "Distro $i succes"
             done
           fi
